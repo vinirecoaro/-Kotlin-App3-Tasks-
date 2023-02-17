@@ -28,7 +28,6 @@ class PersonRepository(val context: Context) {
             }
 
             override fun onFailure(call: Call<PersonModel>, t: Throwable) {
-                val s = ""
                 listener.onFailure(context.getString(R.string.ERROR_UNEXPECTED))
             }
         })
