@@ -1,7 +1,9 @@
 package com.devmasterteam.tasks.viewmodel
 
 import android.app.Application
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -31,6 +33,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * Faz login usando API
      */
+    @RequiresApi(Build.VERSION_CODES.M)
     fun doLogin(email: String, password: String) {
         personRepository.login(email, password, object : APIListener<PersonModel> {
             override fun onSucess(result: PersonModel) {
@@ -52,6 +55,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
      * Verifica se usuário está logado
      */
 
+    @RequiresApi(Build.VERSION_CODES.M)
     fun verifyLoggedUser() {
         val token = securityPreferences.get(TaskConstants.SHARED.TOKEN_KEY)
         val person = securityPreferences.get(TaskConstants.SHARED.PERSON_KEY)

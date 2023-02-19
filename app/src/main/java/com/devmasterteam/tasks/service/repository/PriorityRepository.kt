@@ -1,6 +1,8 @@
 package com.devmasterteam.tasks.service.repository
 
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.devmasterteam.tasks.R
 import com.devmasterteam.tasks.service.constants.TaskConstants
 import com.devmasterteam.tasks.service.listener.APIListener
@@ -40,7 +42,12 @@ class PriorityRepository(context: Context): BaseRepository(context) {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     fun list(listener: APIListener<List<PriorityModel>>){
+        if(!isConnectionAvailable()){
+            listener.onFailure(context.getString(R.string.ERROR_INTERNET_CONNECTION))
+            return
+        }
         executeCall(remote.list(), listener)
     }
 
