@@ -1,10 +1,12 @@
 package com.devmasterteam.tasks.view
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.devmasterteam.tasks.R
@@ -17,6 +19,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var viewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,6 +33,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         // Eventos
         binding.buttonLogin.setOnClickListener(this)
         binding.textRegister.setOnClickListener(this)
+        binding.textRegister.setOnClickListener(this)
 
         //Verifica se o usuario está logado
         viewModel.verifyLoggedUser()
@@ -38,9 +42,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         observe()
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onClick(v: View) {
         if(v.id == R.id.button_login){
             handleLogin()
+        }else if(v.id == R.id.text_register){
+            startActivity(Intent(applicationContext, RegisterActivity::class.java))
         }
     }
 
@@ -61,6 +68,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun handleLogin(){
         val email = binding.editEmail.text.toString()
         val password = binding.editPassword.text.toString()
